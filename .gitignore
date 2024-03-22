@@ -1,2 +1,4 @@
 notebooks/test.ipynb
 notebooks/lightning_logs
+data/raw
+data/processed
