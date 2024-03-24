@@ -20,6 +20,9 @@ class Dataset:
             df = pd.read_csv(os.path.join(data_folder, file), encoding='utf-8', parse_dates=['year'])
             dfs.append(df)
         df = pd.concat(dfs)
+
+        # drop 'No' column
+        df.drop(columns='No', inplace=True)
         return df
     def process_data(self) -> pd.DataFrame:
         """
