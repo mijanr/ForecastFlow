@@ -6,8 +6,10 @@ data_params:
   # 'Shunyi', 'Dongsi', 'Dingling', 'Wanshouxigong', 'Huairou',
   # 'Wanliu', 'Aotizhongxin', 'Gucheng', 'Nongzhanguan', 'Tiantan',
   # 'Guanyuan', 'Changping'
-  target: 'PM25' # 'PM25', 'PM10', 'O3', 'NO2', 'CO', 'SO2'
+  target: 'PM2.5' # 'PM2.5', 'PM10', 'SO2', 'NO2', 'CO', 'O3', 'TEMP', 'PRES', 'DEWP', 'RAIN', 'WSPM'
   normalize: False
+  get_year: True
+  get_month: True
   window_size: 5
   forecast_horizon: 5
   granularity: 'hourly' # 'hourly', 'daily', 'weekly', 'monthly'

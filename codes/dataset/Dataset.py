@@ -32,8 +32,8 @@ class Dataset:
 
         # if already processed, load the processed data
         processed_data_folder = os.path.join(self.base_path, 'data', 'processed')
-        if os.path.exists(os.path.join(processed_data_folder, dataset_name + '_processed.csv')):
-            df = pd.read_csv(os.path.join(processed_data_folder, dataset_name + '_processed.csv'))
+        if os.path.exists(os.path.join(processed_data_folder, dataset_name + '_processed.parquet')):
+            df = pd.read_parquet(os.path.join(processed_data_folder, dataset_name + '_processed.parquet'))
             return df
         else:
             df = self.load_data()
@@ -57,7 +57,8 @@ class Dataset:
             df.drop(columns='wd', inplace=True)
 
         # if not saved already, save the processed data
-        df.to_csv(os.path.join(processed_data_folder, dataset_name + '_processed.csv'))
+        # save as parquet
+        df.to_parquet(os.path.join(processed_data_folder, dataset_name + '_processed.parquet'))
         return df
     
     def make_windowed_dataset(self, 
@@ -96,6 +97,13 @@ class Dataset:
             df.set_index('datetime', inplace=True)
             # to_datetime
             df.index = pd.to_datetime(df.index)
+        
+        # get_year, get_month from kwargs
+        if kwargs['get_year']:
+            df['year'] = df.index.year
+        if kwargs['get_month']:
+            df['month'] = df.index.month
+
         if granularity == 'hourly':
             df = df.resample('H').mean()
         elif granularity == 'daily':
@@ -133,6 +141,6 @@ if __name__ == "__main__":
     test_ratio = 0.2
 
 
-    dataset.train_test_split(df, station_name, target, window_size, forecast_horizon, granularity)
+    dataset.train_test_split(df, station_name, target, window_size, forecast_horizon, granularity, test_ratio)
 
 
