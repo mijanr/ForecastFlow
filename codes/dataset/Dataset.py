@@ -32,8 +32,8 @@ class Dataset:
 
         # if already processed, load the processed data
         processed_data_folder = os.path.join(self.base_path, 'data', 'processed')
-        if os.path.exists(os.path.join(processed_data_folder, dataset_name + '_processed.csv')):
-            df = pd.read_csv(os.path.join(processed_data_folder, dataset_name + '_processed.csv'))
+        if os.path.exists(os.path.join(processed_data_folder, dataset_name + '_processed.parquet')):
+            df = pd.read_parquet(os.path.join(processed_data_folder, dataset_name + '_processed.parquet'))
             return df
         else:
             df = self.load_data()
@@ -57,7 +57,8 @@ class Dataset:
             df.drop(columns='wd', inplace=True)
 
         # if not saved already, save the processed data
-        df.to_csv(os.path.join(processed_data_folder, dataset_name + '_processed.csv'))
+        # save as parquet
+        df.to_parquet(os.path.join(processed_data_folder, dataset_name + '_processed.parquet'))
         return df
     
     def make_windowed_dataset(self, 
