@@ -82,7 +82,8 @@ class Dataset:
                          window_size: int,
                          forecast_horizon: int,
                          granularity: str, 
-                         test_ratio: float = 0.2
+                         test_ratio: float = 0.2,
+                         **kwargs
                         ):
         """
         Split the data into train and test sets
@@ -110,16 +111,13 @@ class Dataset:
         # keep the last test_ratio% data for testing
         test_size = int(len(df) * test_ratio)
         train_size = len(df) - test_size
-        df_X_train = df_X.iloc[:train_size]
-        df_X_test = df_X.iloc[train_size:]
+        train_X, test_X = df_X.iloc[:train_size], df_X.iloc[train_size:]
+        train_y, test_y = df_y.iloc[:train_size], df_y.iloc[train_size:]
 
-        df_y_train = df_y.iloc[:train_size]
-        df_y_test = df_y.iloc[train_size:]
+        # create windowed dataset
+        X_train, y_train = self.make_windowed_dataset(train_X, train_y, window_size, forecast_horizon)
+        X_test, y_test = self.make_windowed_dataset(test_X, test_y, window_size, forecast_horizon)
 
-        # create the windowed dataset
-        X_train, y_train = self.make_windowed_dataset(df_X_train, window_size, forecast_horizon)
-        X_test, y_test = self.make_windowed_dataset(df_X_test, window_size, forecast_horizon)
-        
         return X_train, y_train, X_test, y_test
 
   
