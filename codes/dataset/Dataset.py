@@ -97,6 +97,13 @@ class Dataset:
             df.set_index('datetime', inplace=True)
             # to_datetime
             df.index = pd.to_datetime(df.index)
+        
+        # get_year, get_month from kwargs
+        if kwargs['get_year']:
+            df['year'] = df.index.year
+        if kwargs['get_month']:
+            df['month'] = df.index.month
+
         if granularity == 'hourly':
             df = df.resample('H').mean()
         elif granularity == 'daily':
@@ -134,6 +141,6 @@ if __name__ == "__main__":
     test_ratio = 0.2
 
 
-    dataset.train_test_split(df, station_name, target, window_size, forecast_horizon, granularity)
+    dataset.train_test_split(df, station_name, target, window_size, forecast_horizon, granularity, test_ratio)
 
 
