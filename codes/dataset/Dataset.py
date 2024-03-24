@@ -120,8 +120,19 @@ class Dataset:
         
         return X_train, y_train, X_test, y_test
 
-
+  
 if __name__ == "__main__":
     dataset = Dataset()
     df = dataset.process_data()
+
+    station_name = 'Shunyi'
+    target = 'PM2.5'
+    window_size = 24
+    forecast_horizon = 5
+    granularity = 'weekly'
+    test_ratio = 0.2
+
+
+    dataset.train_test_split(df, station_name, target, window_size, forecast_horizon, granularity)
+
 
