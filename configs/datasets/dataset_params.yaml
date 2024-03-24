@@ -1,0 +1,9 @@
+model_params:
+  _target_: codes.dataset.Dataset.Dataset
+
+data_params:
+  station_name: 'Shunyi'
+  # 'Shunyi', 'Dongsi', 'Dingling', 'Wanshouxigong', 'Huairou',
+  # 'Wanliu', 'Aotizhongxin', 'Gucheng', 'Nongzhanguan', 'Tiantan',
+  # 'Guanyuan', 'Changping'
+  normalize: False
