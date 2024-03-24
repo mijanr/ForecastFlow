@@ -73,6 +73,54 @@ class Dataset:
         y = np.array(y)
         return X, y
     
+    def train_test_split(self,
+                         df: pd.DataFrame,
+                         station_name: str,
+                         target: str,
+                         window_size: int,
+                         forecast_horizon: int,
+                         granularity: str, 
+                         test_ratio: float = 0.2
+                        ):
+        """
+        Split the data into train and test sets
+        """
+        # select the station
+        df = df[df['station'] == station_name].drop(columns='station')
+        
+        # if datetime is not the index, set it as index
+        if df.index.name != 'datetime':
+            df.set_index('datetime', inplace=True)
+            # to_datetime
+            df.index = pd.to_datetime(df.index)
+        if granularity == 'hourly':
+            df = df.resample('H').mean()
+        elif granularity == 'daily':
+            df = df.resample('D').mean()
+        elif granularity == 'weekly':
+            df = df.resample('W').mean()
+        else:
+            raise ValueError('Granularity should be either hourly, daily or weekly')
+        
+        df_X = df.drop(columns=target)
+        df_y = df[target]
+
+        # keep the last test_ratio% data for testing
+        test_size = int(len(df) * test_ratio)
+        train_size = len(df) - test_size
+        df_X_train = df_X.iloc[:train_size]
+        df_X_test = df_X.iloc[train_size:]
+
+        df_y_train = df_y.iloc[:train_size]
+        df_y_test = df_y.iloc[train_size:]
+
+        # create the windowed dataset
+        X_train, y_train = self.make_windowed_dataset(df_X_train, window_size, forecast_horizon)
+        X_test, y_test = self.make_windowed_dataset(df_X_test, window_size, forecast_horizon)
+        
+        return X_train, y_train, X_test, y_test
+
+
 if __name__ == "__main__":
     dataset = Dataset()
     df = dataset.process_data()
