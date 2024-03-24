@@ -60,18 +60,20 @@ class Dataset:
         df.to_csv(os.path.join(processed_data_folder, dataset_name + '_processed.csv'))
         return df
     
-    def make_windowed_dataset(self, df: pd.DataFrame, window_size: int, forecast_horizon: int):
+    def make_windowed_dataset(self, 
+                              df_X: pd.DataFrame,
+                              df_y: pd.DataFrame,
+                              window_size: int, 
+                              forecast_horizon: int):
         """
         Create windowed dataset
         """
         X = []
         y = []
-        for i in range(len(df) - window_size - forecast_horizon + 1):
-            X.append(df.iloc[i:i+window_size].values)
-            y.append(df.iloc[i+window_size:i+window_size+forecast_horizon].values)
-        X = np.array(X)
-        y = np.array(y)
-        return X, y
+        for i in range(len(df_X) - window_size - forecast_horizon + 1):
+            X.append(df_X.iloc[i:i+window_size].values)
+            y.append(df_y.iloc[i+window_size:i+window_size+forecast_horizon].values)
+        return np.array(X), np.array(y)
     
     def train_test_split(self,
                          df: pd.DataFrame,
