@@ -126,6 +126,13 @@ class Dataset:
         X_train, y_train = self.make_windowed_dataset(train_X, train_y, window_size, forecast_horizon)
         X_test, y_test = self.make_windowed_dataset(test_X, test_y, window_size, forecast_horizon)
 
+        # if normalization is required, min-max normalize the data
+        if kwargs['normalize']:
+            X_train = (X_train - X_train.min()) / (X_train.max() - X_train.min())
+            y_train = (y_train - y_train.min()) / (y_train.max() - y_train.min())
+            X_test = (X_test - X_test.min()) / (X_test.max() - X_test.min())
+            y_test = (y_test - y_test.min()) / (y_test.max() - y_test.min())
+
         return X_train, y_train, X_test, y_test
 
   
