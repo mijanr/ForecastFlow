@@ -188,6 +188,20 @@ if __name__ == "__main__":
     dataset = Dataset()
     df = dataset.process_data()
 
+    kwargs = {
+        'target': 'PM10',
+        'station_name': 'Shunyi',
+        'window_size': 24,
+        'forecast_horizon': 5,
+        'granularity': 'daily',
+        'test_ratio': 0.2,
+        'get_year': True,
+        'get_month': True,
+    }
+
+    # load tsai data
+    dataset.get_tsai_data(**kwargs)
+
     station_name = 'Shunyi'
     target = 'PM2.5'
     window_size = 24
@@ -196,6 +210,6 @@ if __name__ == "__main__":
     test_ratio = 0.2
 
 
-    dataset.train_test_split(df, station_name, target, window_size, forecast_horizon, granularity, test_ratio)
+    #dataset.train_test_split(df, station_name, target, window_size, forecast_horizon, granularity, test_ratio)
 
 
