@@ -150,6 +150,38 @@ class Dataset:
         return df
     
     def get_tsai_data(self, **kwargs):
+        """
+        Get the data in the format required by tsai library
+        """
+        # load the processed data   
+        df = self.process_data()
+
+        # select the station
+        df = df[df['station'] == kwargs['station_name']].drop(columns='station')
+
+        # gset features and target columns
+        target_col = kwargs['target']
+        target_position = df.columns.get_loc(target_col)
+        get_x = [i for i in range(len(df.columns)) if i != target_position]
+        get_y = [target_position]
+
+        # granularities, hourly, daily, weekly
+        df = self.apply_granularity(df, kwargs['granularity'])
+
+        # SlidingWindow
+        ts = df.values
+        X, y = SlidingWindow(window_len=kwargs['window_size'], horizon=kwargs['forecast_horizon'], get_x=get_x, get_y=get_y)(ts)
+
+        # TimeSplitter
+        splitter = TimeSplitter(valid_size=0.1, 
+                                test_size=kwargs['test_ratio'], 
+                                fcst_horizon=kwargs['forecast_horizon'])(y)
+        tfms = [None, TSForecasting()]
+        batch_tfms = TSStandardize()
+
+        return X, y, splitter, tfms, batch_tfms
+    
+
 
   
 if __name__ == "__main__":
