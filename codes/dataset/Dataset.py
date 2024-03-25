@@ -96,12 +96,7 @@ class Dataset:
         """
         # select the station
         df = df[df['station'] == station_name].drop(columns='station')
-        
-        # if datetime is not the index, set it as index
-        if df.index.name != 'datetime':
-            df.set_index('datetime', inplace=True)
-            # to_datetime
-            df.index = pd.to_datetime(df.index)
+    
         
         # get_year, get_month from kwargs
         if kwargs['get_year']:
@@ -109,14 +104,8 @@ class Dataset:
         if kwargs['get_month']:
             df['month'] = df.index.month
 
-        if granularity == 'hourly':
-            df = df.resample('H').mean()
-        elif granularity == 'daily':
-            df = df.resample('D').mean()
-        elif granularity == 'weekly':
-            df = df.resample('W').mean()
-        else:
-            raise ValueError('Granularity should be either hourly, daily or weekly')
+        # apply granularity
+        df = self.apply_granularity(df, granularity)
         
         df_X = df.drop(columns=target)
         df_y = df[target]
@@ -139,6 +128,28 @@ class Dataset:
             y_test = (y_test - y_test.min()) / (y_test.max() - y_test.min())
 
         return X_train, y_train, X_test, y_test
+    
+    def apply_granularity(self, df: pd.DataFrame, granularity: str):
+        """
+        Apply the granularity to the data
+        """
+        # if datetime is not the index, set it as index
+        if df.index.name != 'datetime':
+            df.set_index('datetime', inplace=True)
+            # to_datetime
+            df.index = pd.to_datetime(df.index)
+
+        if granularity == 'hourly':
+            df = df.resample('H').mean()
+        elif granularity == 'daily':
+            df = df.resample('D').mean()
+        elif granularity == 'weekly':
+            df = df.resample('W').mean()
+        else:
+            raise ValueError('Granularity should be either hourly, daily or weekly')
+        return df
+    
+    def get_tsai_data(self, **kwargs):
 
   
 if __name__ == "__main__":
