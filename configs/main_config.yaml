@@ -1,7 +1,7 @@
 defaults:
   - _self_
   - datasets: dataset_params
-  #- models: LSTM
+  - models: tsai_models
   #- override hydra/sweeper: optuna
 dataset_name:
   - Beijing_AirQuality
@@ -9,7 +9,7 @@ dataset_name:
 training_params:
   epochs: 10
   lr: 0.001
-  batch_size: 64
+  batch_size: 128
 
 # hydra:
 # #  run:
