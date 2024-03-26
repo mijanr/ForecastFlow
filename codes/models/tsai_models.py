@@ -5,6 +5,7 @@ from tsai.callback.core import ShowGraph
 import os, sys
 import matplotlib.pyplot as plt
 import seaborn as sns
+import torch
 import git
 
 repoPath = git.Repo('.', search_parent_directories=True).working_tree_dir
@@ -72,15 +73,29 @@ class TSAI_Models:
         # load the model
         fcst = load_learner(saved_model_path)
         raw_preds, target, preds = fcst.get_X_preds(X[splits[1]], y[splits[1]])
-
-        return raw_preds, target, preds
+        
+        preds = torch.Tensor(preds)
+        # calculate the metrics
+        metrics =  {
+            'mae': mae(target, preds),
+            'mse': mse(target, preds)
+            }
+        
+        outputDict = {
+            'raw_preds': raw_preds,
+            'target': target,
+            'preds': preds,
+            'metrics': metrics
+        }
+                
+        return outputDict
+        
+        
     
     def plot_predictions(self, archName, target, preds):
         # plot original and predicted time series
         target_flattened = target.flatten()
-        preds_flattened = []
-        for pred in preds:
-            preds_flattened.extend(pred)
+        preds_flattened = preds.flatten()
         
         # plot 50 time steps
         time_steps = 50
@@ -88,15 +103,15 @@ class TSAI_Models:
         preds_flattened = preds_flattened[:time_steps]
 
         # plot the time series
-        plt.figure(figsize=(12, 6))
-        sns.lineplot(x=range(len(target_flattened)), y=target_flattened, label='Original')
-        sns.lineplot(x=range(len(target_flattened)), y=preds_flattened, label='Forecast')
-        plt.legend()
-        #plt.show()
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax.plot(target_flattened, label='Original')
+        ax.plot(preds_flattened, label='Predicted')
+        ax.set_title(f'Original vs Predicted time series for {archName}')
+        ax.legend()
 
-        # save the plot
-        plt.savefig(os.path.join(results_savePath, archName + '.png'))
+        plt.tight_layout()
+        plt.close(fig)
 
-        return
+        return fig
 
         
