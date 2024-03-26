@@ -82,6 +82,12 @@ class TSAI_Models:
         for pred in preds:
             preds_flattened.extend(pred)
         
+        # plot 50 time steps
+        time_steps = 50
+        target_flattened = target_flattened[:time_steps]
+        preds_flattened = preds_flattened[:time_steps]
+
+        # plot the time series
         plt.figure(figsize=(12, 6))
         sns.lineplot(x=range(len(target_flattened)), y=target_flattened, label='Original')
         sns.lineplot(x=range(len(target_flattened)), y=preds_flattened, label='Forecast')
