@@ -2,4 +2,4 @@ model:
   _target_: codes.models.tsai_models.TSAI_Models
 
 arch: 
-  model_name: 'LSTMPlus'
+  model_name: 'InceptionTimePlus' # InceptionTimePlus, LSTMPlus

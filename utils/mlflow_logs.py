@@ -15,7 +15,7 @@ def log_results(cfg, results):
 
     # set experiment name with the model name
     mlflow.set_experiment(model_name)
-
+    
     # station_name
     station_name = cfg.datasets.data_params.station_name
 
@@ -38,8 +38,7 @@ def log_results(cfg, results):
         # log fig as artifact
         mlflow.log_figure(results['fig'], 'original_vs_predicted.png')
 
-
-
         mlflow.end_run()
-    return
+        
+        return
 
