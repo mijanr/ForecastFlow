@@ -149,6 +149,13 @@ class Dataset:
             raise ValueError('Granularity should be either hourly, daily or weekly')
         return df
     
+    def standardize_data(self, df: pd.DataFrame):
+        """
+        Normalize the data
+        """
+        # standardize the data
+        return (df - df.mean()) / df.std()
+    
     def get_tsai_data(self, **kwargs):
         """
         Get the data in the format required by tsai library
@@ -167,6 +174,10 @@ class Dataset:
 
         # granularities, hourly, daily, weekly
         df = self.apply_granularity(df, kwargs['granularity'])
+
+        # if normalization is required, min-max normalize the data
+        if kwargs['standardize']:
+            df = self.standardize_data(df)
 
         # SlidingWindow
         ts = df.values
