@@ -1,4 +1,4 @@
-model_params:
+DataLoader:
   _target_: codes.dataset.Dataset.Dataset
 
 data_params:
@@ -6,12 +6,13 @@ data_params:
   # 'Shunyi', 'Dongsi', 'Dingling', 'Wanshouxigong', 'Huairou',
   # 'Wanliu', 'Aotizhongxin', 'Gucheng', 'Nongzhanguan', 'Tiantan',
   # 'Guanyuan', 'Changping'
-  target: 'PM2.5' # 'PM2.5', 'PM10', 'SO2', 'NO2', 'CO', 'O3', 'TEMP', 'PRES', 'DEWP', 'RAIN', 'WSPM'
+  target: 'PM2.5' # 'PM2.5', 'PM10', 'TEMP'
   normalize: False
   get_year: True
   get_month: True
-  window_size: 5
+  window_size: 24
   forecast_horizon: 5
   granularity: 'hourly' # 'hourly', 'daily', 'weekly', 'monthly'
   test_ratio: 0.2
+  for_tsai: True
 
