@@ -38,6 +38,9 @@ def log_results(cfg, results):
         # log fig as artifact
         mlflow.log_figure(results['fig'], 'original_vs_predicted.png')
 
+        # log model name
+        mlflow.log_param('model_name', model_name)
+
         mlflow.end_run()
         
         return
