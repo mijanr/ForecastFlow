@@ -7,7 +7,7 @@ dataset_name:
   - Beijing_AirQuality
 
 training_params:
-  epochs: 10
+  epochs: 2
   lr: 0.001
   batch_size: 128
 

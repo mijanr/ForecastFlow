@@ -7,7 +7,7 @@ data_params:
   # 'Wanliu', 'Aotizhongxin', 'Gucheng', 'Nongzhanguan', 'Tiantan',
   # 'Guanyuan', 'Changping'
   target: 'PM2.5' # 'PM2.5', 'PM10', 'TEMP'
-  normalize: False
+  standardize: True
   get_year: True
   get_month: True
   window_size: 24

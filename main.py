@@ -2,6 +2,7 @@ import hydra
 from hydra.utils import instantiate
 from omegaconf import DictConfig
 import numpy as np
+from utils.mlflow_logs import log_results
 
 @hydra.main(version_base='1.3.2', config_path="configs", config_name="main_config.yaml")    
 def main(cfg: DictConfig) -> None:
@@ -37,11 +38,15 @@ def main(cfg: DictConfig) -> None:
             'y': y,
             'splits': splitter
         }
-        raw_preds, target, preds = model.evaluate_model(**eval_params)
+        outputDict = model.evaluate_model(**eval_params)
 
-        # plot the results
-        model.plot_predictions(cfg.models.arch.model_name, target, preds)
+        # get fig
+        fig = model.plot_predictions(cfg.models.arch.model_name, outputDict['target'], outputDict['preds'])
 
+        outputDict['fig'] = fig
+        
+        # log results to mlflow
+        log_results(cfg, outputDict)
 
     else:
         # load train and test data
