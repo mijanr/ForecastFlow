@@ -61,6 +61,10 @@ class Dataset:
             # drop wind direction column
             df.drop(columns='wd', inplace=True)
 
+        # keep columsn which have a correlation of more than 0.2 with PM2.5
+        cols = ['PM2.5', 'PM10', 'SO2', 'NO2', 'CO', 'WSPM', 'station']
+        df = df[cols]
+        
         # if not saved already, save the processed data
         # save as parquet
         df.to_parquet(os.path.join(processed_data_folder, dataset_name + '_processed.parquet'))
@@ -120,12 +124,10 @@ class Dataset:
         X_train, y_train = self.make_windowed_dataset(train_X, train_y, window_size, forecast_horizon)
         X_test, y_test = self.make_windowed_dataset(test_X, test_y, window_size, forecast_horizon)
 
-        # if normalization is required, min-max normalize the data
-        if kwargs['normalize']:
-            X_train = (X_train - X_train.min()) / (X_train.max() - X_train.min())
-            y_train = (y_train - y_train.min()) / (y_train.max() - y_train.min())
-            X_test = (X_test - X_test.min()) / (X_test.max() - X_test.min())
-            y_test = (y_test - y_test.min()) / (y_test.max() - y_test.min())
+        # if standardize is True, standardize the data
+        if kwargs['standardize']:
+            X_train = (X_train - X_train.mean()) / X_train.std()
+            X_test = (X_test - X_test.mean()) / X_test.std()
 
         return X_train, y_train, X_test, y_test
     
