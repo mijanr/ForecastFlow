@@ -39,3 +39,8 @@ Different windows were used for forecasting purpuse in case of XGBoost, so the p
 ```bash
 conda env create -f requirements.yml
 ```
+
+To update with new libraries:
+```bash
+╰─ conda env export --no-builds | grep -v "prefix" > requirements.yml
+```
