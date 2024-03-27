@@ -1,0 +1,25 @@
+dataset_name:
+- Beijing_AirQuality
+training_params:
+  epochs: 2
+  lr: 0.001
+  batch_size: 128
+datasets:
+  DataLoader:
+    _target_: codes.dataset.Dataset.Dataset
+  data_params:
+    station_name: Shunyi
+    target: PM2.5
+    standardize: true
+    get_year: false
+    get_month: false
+    window_size: 10
+    forecast_horizon: 2
+    granularity: hourly
+    test_ratio: 0.2
+    for_tsai: false
+models:
+  model:
+    _target_: codes.models.XGB.XGB
+  arch:
+    model_name: XGB
