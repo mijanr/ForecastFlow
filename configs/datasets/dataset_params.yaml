@@ -8,11 +8,11 @@ data_params:
   # 'Guanyuan', 'Changping'
   target: 'PM2.5' # 'PM2.5', 'PM10', 'TEMP'
   standardize: True
-  get_year: True
-  get_month: True
-  window_size: 24
-  forecast_horizon: 5
+  get_year: False
+  get_month: False
+  window_size: 10
+  forecast_horizon: 2
   granularity: 'hourly' # 'hourly', 'daily', 'weekly', 'monthly'
   test_ratio: 0.2
-  for_tsai: True
+  for_tsai: False
 
