@@ -80,9 +80,14 @@ class Dataset:
         """
         X = []
         y = []
-        for i in range(len(df_X) - window_size - forecast_horizon + 1):
-            X.append(df_X.iloc[i:i+window_size].values)
-            y.append(df_y.iloc[i+window_size:i+window_size+forecast_horizon].values)
+        features = df_X.values
+        target = df_y.values
+        past_horizon = window_size
+        fh = forecast_horizon
+        
+        for i in range(past_horizon, len(features)-fh):
+            X.append(features[i-past_horizon:i])
+            y.append(target[i:i+fh])
         return np.array(X), np.array(y)
     
     def train_test_split(self,

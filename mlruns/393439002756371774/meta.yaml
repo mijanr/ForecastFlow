@@ -1,0 +1,6 @@
+artifact_location: file:///home/pops/myProjects/ts_forecasting/mlruns/393439002756371774
+creation_time: 1711542542039
+experiment_id: '393439002756371774'
+last_update_time: 1711542542039
+lifecycle_stage: active
+name: LSTMPlus

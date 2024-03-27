@@ -9,7 +9,7 @@ import torch
 import git
 
 repoPath = git.Repo('.', search_parent_directories=True).working_tree_dir
-model_savePath = os.path.join(repoPath, 'saved_tsai_models')
+model_savePath = os.path.join(repoPath, 'saved_models')
 results_savePath = os.path.join(repoPath, 'results')
 
 
