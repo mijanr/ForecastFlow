@@ -1,5 +1,5 @@
 # Time-series Forecasting
-This repository contains the code for time-series forecasting using various models, such as ARIMA, SARIMA, LSTM, etc. It contains the complete pipeline from data preprocessing, model building, training, hyperparameter tuning, and evaluation.
+This repository contains the code for time-series forecasting using various models, such as InceptionTime, LSTM, XGBoost etc. It contains the complete pipeline from data preprocessing, model building, training, hyperparameter tuning, and evaluation.
 
 MLFlow is used to track the experiments and log the metrics, parameters, and artifacts. Hydra is used for configuration management, and Optuna is used for hyperparameter optimization.
 
@@ -42,5 +42,5 @@ conda env create -f requirements.yml
 
 To update with new libraries:
 ```bash
-╰─ conda env export --no-builds | grep -v "prefix" > requirements.yml
+conda env export --no-builds | grep -v "prefix" > requirements.yml
 ```
