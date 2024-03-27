@@ -1,0 +1,5 @@
+model:
+  _target_: codes.models.XGB.XGB
+
+arch: 
+  model_name: 'XGB'
