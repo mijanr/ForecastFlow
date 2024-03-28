@@ -20,15 +20,15 @@ The following models are used for forecasting:
 ### Results
 The following are the results of the forecasting models:
 
- - InceptionTime with daily data, past_horizon = 10, forecast_horizon = 1:
+ - `InceptionTime` with ```hourly``` data, ```past_horizon``` = ```10```, ```forecast_horizon``` = ```1```:
 
 ![Image](mlruns/951558179134731346/7ced2c0056484ee2840a84255cbcbaf2/artifacts/original_vs_predicted.png)
 
-- LSTM with daily data, past_horizon = 10, forecast_horizon = 1, with Standardized data:
+- `LSTM` with ```hourly``` data, ```past_horizon``` = ```10```, `forecast_horizon` = `1`, with Standardized data:
 
 ![Image](mlruns/393439002756371774/ac975219548c403888db88d86348667d/artifacts/original_vs_predicted.png)
 
-- XGBoost with daily data, past_horizon = 10, forecast_horizon = 1:
+- `XGBoost` with `hourly` data, `past_horizon` = `10`, `forecast_horizon` = `1`:
 
 ![Image](mlruns/381073146271177264/1b8c9c27f2404f089532d3c71724464a/artifacts/original_vs_predicted.png)
 
