@@ -1,4 +1,4 @@
-# ForecastFlow: An automated codebase for time-series forecasting 
+# ForecastFlow: An automated code-base for time-series forecasting 
 This repository contains the code for time-series forecasting using various models, such as InceptionTime, LSTM, XGBoost, etc. It contains the complete pipeline from data preprocessing, model building, training, hyperparameter tuning, and evaluation.
 
 MLFlow tracks the experiments and logs the metrics, parameters, and artifacts. Hydra manages configurations, and Optuna optimizes hyperparameters.
