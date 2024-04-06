@@ -32,6 +32,7 @@ jobs:
           if [[ $(git status --porcelain) ]]; then
             git config --global user.email "md.rahman.ce@gmail.com"
             git config --global user.name "Md Mijanur Rahman"
+            git add utils/best_results.txt
             git commit -am "Update results" || exit 0
             git push
           fi
