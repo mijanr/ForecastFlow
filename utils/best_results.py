@@ -26,7 +26,7 @@ def get_best_run():
     artifact_dict = dict()
     for index, row in df_best.iterrows():
         # split the artifact_uri to get the path from mlruns directory
-        row['artifact_uri'] = row['artifact_uri'].split('ts_forecasting/')[1]
+        row['artifact_uri'] = row['artifact_uri'].split('ForecastFlow/')[1]
         artifact_dict[row['params.model_name']] = row['artifact_uri'] + "/original_vs_predicted.png"
     
     # save the best model artifact_uri to a file
