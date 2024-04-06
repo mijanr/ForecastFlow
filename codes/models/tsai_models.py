@@ -89,29 +89,7 @@ class TSAI_Models:
         }
                 
         return outputDict
-        
-        
-    
-    def plot_predictions(self, archName, target, preds):
-        # plot original and predicted time series
-        target_flattened = target.flatten()
-        preds_flattened = preds.flatten()
-        
-        # plot 50 time steps
-        time_steps = 50
-        target_flattened = target_flattened[:time_steps]
-        preds_flattened = preds_flattened[:time_steps]
 
-        # plot the time series
-        fig, ax = plt.subplots(figsize=(10, 6))
-        ax.plot(target_flattened, label='Original')
-        ax.plot(preds_flattened, label='Predicted')
-        ax.set_title(f'Original vs Predicted time series for {archName}')
-        ax.legend()
-
-        plt.tight_layout()
-        plt.close(fig)
-
-        return fig
-
+if __name__ == '__main__':
+    pass
         
