@@ -1,0 +1,3 @@
+InceptionTimePlus: mlruns/325423491330313640/6d59b412446c4ea3af8eef4115166ba7/artifacts/original_vs_predicted.png
+LSTMPlus: mlruns/423838378027944640/4db5928a3b064aeda954201f7b8abb49/artifacts/original_vs_predicted.png
+XGB: mlruns/354260164881130169/6c9cedbbefcd49e1b0104d09ad7e28ad/artifacts/original_vs_predicted.png
