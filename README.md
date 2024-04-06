@@ -22,15 +22,15 @@ The following are the results of the forecasting models:
 
  - `InceptionTime` with ```hourly``` data, ```past_horizon``` = ```10```, ```forecast_horizon``` = ```1```:
 
-![Image](mlruns/951558179134731346/7ced2c0056484ee2840a84255cbcbaf2/artifacts/original_vs_predicted.png)
+<img src = "mlruns/325423491330313640/6d59b412446c4ea3af8eef4115166ba7/artifacts/original_vs_predicted.png" width = "500">
 
 - `LSTM` with ```hourly``` data, ```past_horizon``` = ```10```, `forecast_horizon` = `1`, with Standardized data:
 
-![Image](mlruns/393439002756371774/ac975219548c403888db88d86348667d/artifacts/original_vs_predicted.png)
+<img src = "mlruns/423838378027944640/4db5928a3b064aeda954201f7b8abb49/artifacts/original_vs_predicted.png" width = "500">
 
 - `XGBoost` with `hourly` data, `past_horizon` = `10`, `forecast_horizon` = `1`:
 
-![Image](mlruns/381073146271177264/1b8c9c27f2404f089532d3c71724464a/artifacts/original_vs_predicted.png)
+<img src = "mlruns/354260164881130169/6c9cedbbefcd49e1b0104d09ad7e28ad/artifacts/original_vs_predicted.png" width = "500">
 
 Different windows were used for forecasting purposes in the case of XGBoost, so the plots are not comparable.
 
