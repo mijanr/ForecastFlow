@@ -6,7 +6,7 @@ on:
       - git-workflow
 
 jobs:
-  update-readme:
+  get-best-runs:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install mlflow git
+          pip install mlflow python-git
 
       - name: Run script
         run: python3 utils/best_results.py
