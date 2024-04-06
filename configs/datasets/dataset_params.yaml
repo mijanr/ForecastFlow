@@ -14,5 +14,5 @@ data_params:
   forecast_horizon: 1
   granularity: 'hourly' # 'hourly', 'daily', 'weekly', 'monthly'
   test_ratio: 0.2
-  for_tsai: True
+  for_tsai: False
 

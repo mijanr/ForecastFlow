@@ -1,13 +1,13 @@
 defaults:
   - _self_
   - datasets: dataset_params
-  - models: tsai_models
+  - models: XGB
   #- override hydra/sweeper: optuna
 dataset_name:
   - Beijing_AirQuality
 
 training_params:
-  epochs: 2
+  epochs: 100
   lr: 0.001
   batch_size: 128
 
