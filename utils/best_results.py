@@ -18,12 +18,21 @@ def get_best_run():
     # filter only the columns we need
     all_runs = all_runs[columns]
 
-    # for all 'params.model_name', find the best model based on 'metrics.mae', 
-    #and make a dataframe 
-    df_best = all_runs.groupby('params.model_name').apply(lambda x: 
-                x.loc[x['metrics.mae'].idxmin()]).reset_index(drop=True)
+    # find the best model based on 'metrics.mae' for each 'params.model_name'
+    df_best = all_runs.groupby('params.model_name').apply(lambda x: x.loc[x['metrics.mae'].idxmin()]).reset_index(drop=True)
     
+    # make a dictionary of with key as 'params.model_name' and value as artifact_uri
+    # artifact dict starts from mlruns directory, and ends with /original_vs_predicted.png
+    artifact_dict = dict()
+    for index, row in df_best.iterrows():
+        # split the artifact_uri to get the path from mlruns directory
+        row['artifact_uri'] = row['artifact_uri'].split('ts_forecasting/')[1]
+        artifact_dict[row['params.model_name']] = row['artifact_uri'] + "/original_vs_predicted.png"
     
+    # save the best model artifact_uri to a file
+    with open(f"{basePath}/utils/best_results.txt", "w") as f:
+        for key, value in artifact_dict.items():
+            f.write(f"{key}: {value}\n")
 
     return
     
