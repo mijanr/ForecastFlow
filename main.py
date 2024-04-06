@@ -3,6 +3,7 @@ from hydra.utils import instantiate
 from omegaconf import DictConfig
 import numpy as np
 from utils.mlflow_logs import log_results
+from utils.plot_results import plot_predictions
 
 @hydra.main(version_base='1.3.2', config_path="configs", config_name="main_config.yaml")    
 def main(cfg: DictConfig) -> None:
@@ -41,7 +42,7 @@ def main(cfg: DictConfig) -> None:
         outputDict = model.evaluate_model(**eval_params)
 
         # get fig
-        fig = model.plot_predictions(cfg.models.arch.model_name, outputDict['target'], outputDict['preds'])
+        fig = plot_predictions(cfg.models.arch.model_name, outputDict['target'], outputDict['preds'])
 
         outputDict['fig'] = fig
         
@@ -76,7 +77,7 @@ def main(cfg: DictConfig) -> None:
             outputDict = model.evaluate_model(**eval_params)
 
             # get fig
-            fig = model.plot_predictions(cfg.models.arch.model_name, outputDict['target'], outputDict['preds'])
+            fig = plot_predictions(cfg.models.arch.model_name, outputDict['target'], outputDict['preds'])
             outputDict['fig'] = fig
 
             # log results to mlflow
