@@ -11,8 +11,8 @@ data_params:
   get_year: False
   get_month: False
   window_size: 10
-  forecast_horizon: 2
+  forecast_horizon: 1
   granularity: 'hourly' # 'hourly', 'daily', 'weekly', 'monthly'
   test_ratio: 0.2
-  for_tsai: False
+  for_tsai: True
 
