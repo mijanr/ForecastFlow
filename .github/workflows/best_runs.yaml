@@ -1,0 +1,37 @@
+name: get-best-runs
+
+on:
+  push:
+    branches:
+      - git-workflow
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install mlflow git
+
+      - name: Run script
+        run: python3 utils/best_results.py
+
+      - name: Commit results if it changed
+        run: |
+          # if the results changed then commit the changes
+          if [[ $(git status --porcelain) ]]; then
+            git config --global user.email "md.rahman.ce@gmail.com"
+            git config --global user.name "Md Mijanur Rahman"
+            git commit -am "Update results" || exit 0
+            git push
+          fi
