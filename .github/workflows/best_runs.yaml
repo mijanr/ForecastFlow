@@ -3,7 +3,7 @@ name: get-best-runs
 on:
   push:
     branches:
-      - git-workflow
+      - master
 
 jobs:
   get-best-runs:
