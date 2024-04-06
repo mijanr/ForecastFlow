@@ -90,30 +90,6 @@ class XGB:
         }
 
         return outputDict
-
-    def plot_predictions(self, archName, target, preds):
-        """
-        Plot the predictions
-        """
-        # plot original and predicted time series
-
-
-        target_flattened = target.flatten()
-        preds_flattened = preds.flatten()
-
-        # plot 50 time steps
-        time_steps = 100
-
-        fig, ax = plt.subplots(figsize=(12, 6))
-        ax.plot(target_flattened[:time_steps], label='Original')
-        ax.plot(preds_flattened[:time_steps], label='Predicted')
-        ax.set_title(f'Original vs Predicted time series for {archName}')
-        ax.legend()
-
-        plt.tight_layout()
-        plt.close(fig)
-
-        return fig
     
 
 if __name__ == '__main__':
