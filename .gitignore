@@ -1,2 +1,3 @@
 notebooks/test.ipynb
 notebooks/lightning_logs
+__pycache__
