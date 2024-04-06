@@ -1,0 +1,6 @@
+artifact_location: file:///home/pops/myProjects/ForecastFlow/mlruns/354260164881130169
+creation_time: 1712393120624
+experiment_id: '354260164881130169'
+last_update_time: 1712393120624
+lifecycle_stage: active
+name: XGB

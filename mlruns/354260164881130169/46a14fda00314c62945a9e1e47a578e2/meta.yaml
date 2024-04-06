@@ -1,0 +1,15 @@
+artifact_uri: file:///home/pops/myProjects/ForecastFlow/mlruns/354260164881130169/46a14fda00314c62945a9e1e47a578e2/artifacts
+end_time: 1712393250079
+entry_point_name: ''
+experiment_id: '354260164881130169'
+lifecycle_stage: active
+run_id: 46a14fda00314c62945a9e1e47a578e2
+run_name: Shunyi
+run_uuid: 46a14fda00314c62945a9e1e47a578e2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1712393250010
+status: 3
+tags: []
+user_id: pops
