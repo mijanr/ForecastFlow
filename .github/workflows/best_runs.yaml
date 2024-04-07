@@ -26,13 +26,16 @@ jobs:
       - name: Run script
         run: python3 utils/best_results.py
 
+      - name: Set Git Config
+        run: |
+          git config --global user.email "${{ secrets.MY_EMAIL }}"
+          git config --global user.name "${{ secrets.MY_NAME }}"
+
       - name: Commit results if it changed
         run: |
           # if the results changed then commit the changes
           if [[ $(git status --porcelain) ]]; then
-            git config --global user.email "md.rahman.ce@gmail.com"
-            git config --global user.name "Md Mijanur Rahman"
             git add utils/best_results.txt
-            git commit -am "Update results" || exit 0
+            git commit -m "Update best results"
             git push
           fi
